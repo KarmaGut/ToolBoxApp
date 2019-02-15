@@ -1,3 +1,5 @@
+import SignIn from "@SignIn";
+
 export default routeConfigs = {
     SignIn: {
 		screen: SignIn,

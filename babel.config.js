@@ -12,12 +12,15 @@ module.exports = {
                     "@redux": "./src/redux",
                     "@actions": "./src/redux/actions",
                     "@reducers": "./src/redux/reducers",
-                    "@state": "./src/redux/state",
                     "@utility": "./src/utility",
+                    "@utilityComp": "./src/utility/utilityComp",
+                    "@utilityJS": "./src/utility/utilityJS",
                     "@routes": "./src/routes",
                     "@SignInRoutes": "./src/routes/SignInRoutes",
                     "@MainRoutes": "./src/routes/MainRoutes",
-                    "@App": "./src/App"
+                    "@App": "./src/App",
+                    "@images": "./images",
+                    "@languages": "./src/languages"
                 }
 			}
 		]

@@ -1,6 +1,6 @@
 import * as actionType from "./actions";
 
-export function register(account, password) {
+export const register = (account, password) => {
     return {
         type: actionType.register,
         payload: {
@@ -10,13 +10,13 @@ export function register(account, password) {
     }
 }
 
-export function login() {
+export const login = () => {
     return {
         type: actionType.login
     }
 }
 
-export function logout() {
+export const logout = () => {
     return {
         type: actionType.logout
     }

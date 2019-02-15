@@ -1,25 +1,32 @@
-import state from "@state";
 import { actionType } from "@actions";
 
-export function loginStatus(state = state, action) {
-    switch(action) {
-        case action.type === actionType.login :
+const initialState = {
+    loginStatus: "LOGOUT",
+    accounts: [{
+        account: "admin",
+        password: "123456"
+    }]
+};
+
+export const loginStatus = (store = initialState, action) => {
+    switch(action.type) {
+        case actionType.login :
             return {
-                ...state,
+                ...store,
                 loginStatus: "LOGIN"
             }
-        case action.type === actionType.logout :
+        case actionType.logout :
             return {
-                ...state,
+                ...store,
                 loginStatus: "LOGOUT"
             }
-        case action.type === actionType.register :
+        case actionType.register :
             const { account, password } = action.payload;
             return {
-                ...state,
+                ...store,
                 loginStatus: "LOGIN",
                 accounts: [
-                    ...state.accounts,
+                    ...store.accounts,
                     {
                         account,
                         password
@@ -27,6 +34,6 @@ export function loginStatus(state = state, action) {
                 ]
             }
         default : 
-            return state;
+            return store;
     }
 }
