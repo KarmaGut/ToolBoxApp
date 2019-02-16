@@ -41,13 +41,10 @@ const Header = props => {
 		leftComp,
 		headerRightWidth,
 		rightPressFunc,
-		rightComp
+        rightComp,
+        customStyle
 	} = props;
 	const { goBack } = navigation;
-
-	_leftPress = () => {
-		leftPressFunc ? leftPressFunc() : goBack();
-	};
 
 	_renderLeft = () => {
 		if (leftPressFunc) {
@@ -60,7 +57,7 @@ const Header = props => {
 							width: headerLeftWidth
 						}
 					]}
-					onPress={_leftPress}
+					onPress={leftPressFunc}
 				>
 					{leftComp}
 				</TouchableOpacity>
@@ -128,7 +125,8 @@ const Header = props => {
                         backgroundColor: headerBgColor,
                         borderBottomColor: headerBorderBottomColor,
                         borderBottomWidth: headerBorderBottomWidth,
-                        paddingHorizontal: headerPaddingHorizontal
+                        paddingHorizontal: headerPaddingHorizontal,
+                        ...customStyle
                     }
                 ]}
             >
@@ -148,7 +146,8 @@ Header.propTypes = {
 	headerBgColor: PropTypes.string,
 	headerBorderBottomColor: PropTypes.string,
 	headerBorderBottomWidth: PropTypes.number,
-	headerPaddingHorizontal: PropTypes.number,
+    headerPaddingHorizontal: PropTypes.number,
+    customStyle: PropTypes.object,
 
 	// headerLeft
 	headerLeftWidth: PropTypes.number,

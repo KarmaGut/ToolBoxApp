@@ -1,3 +1,4 @@
 export default {
-    "LoginRegister": "Login/Register"
+    "Login": "Login",
+    "Register": "Register"
 }

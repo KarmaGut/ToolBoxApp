@@ -1,3 +1,4 @@
 export default {
-    "LoginRegister": "登录/注册"
+    "Login": "登录",
+    "Register": "注册"
 }

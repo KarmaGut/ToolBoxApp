@@ -1,10 +1,10 @@
-import MainStackPage from "@components/MainStackPage";
+import SubMainTab from "@SubMainTab";
 
 export default routeConfigs = {
-    MainStackPage: {
-		screen: MainStackPage,
+    SubMainTab: {
+		screen: SubMainTab,
 		navigationOptions: {
-			headTitles: "MainStackPage",
+			headTitles: "SubMainTab",
 			header: null
 		}
 	}
