@@ -7,6 +7,7 @@ import StatusBarComp, {
 import RadiusInput from "./RadiusInput";
 import ButtonComp from "./ButtonComp";
 import AlertDialog from "./AlertDialog";
+import LeftDrawer from "./LeftDrawer";
 
 export {
 	Header,
@@ -16,5 +17,6 @@ export {
 	setStatusBar,
     RadiusInput,
     ButtonComp,
-    AlertDialog
+    AlertDialog,
+    LeftDrawer
 };

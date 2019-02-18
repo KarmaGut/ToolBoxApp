@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import { Header } from "@utilityComp";
 import I18n from "@languages";
-import { FontAweIcon, SimpleLineIcon } from "@Icons";
-import { RadiusInput, ButtonComp } from "@utilityComp";
+import { AntdIcon, SimpleLineIcon } from "@Icons";
+import { RadiusInput, ButtonComp, AlertDialog } from "@utilityComp";
+import { errorCode, userNameReg } from "@validator";
+import { connect } from "react-redux";
+import { actionCreator } from "@actions";
 
-export default class SignIn extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props);
+        this.alert = React.createRef();
         this.state = {
             userName: "",
             password: "",
@@ -16,6 +20,7 @@ export default class SignIn extends Component {
         this._getUserName = this._getUserName.bind(this);
         this._getPassword = this._getPassword.bind(this);
         this._signIn = this._signIn.bind(this);
+        this._loginValidator = this._loginValidator.bind(this);
     }
 
     _getUserName(userName) {
@@ -37,8 +42,65 @@ export default class SignIn extends Component {
             })
     }
 
-    _signIn() {
+    _loginValidator() {
+        const { accountsObj } = this.props;
         const { userName, password } = this.state;
+        // 昵称非空校验
+        if (userName === "") {
+            this.alert.current.show(errorCode["00"]);
+            return false;
+        }
+
+        // 昵称格式校验
+        if (!userNameReg.test(userName)) {
+            this.alert.current.show(errorCode["01"]);
+            return false;
+        }
+
+        // 昵称是否存在校验
+        if (!(userName in accountsObj)) {
+            this.alert.current.show(errorCode["02"]);
+            return false;
+        }
+
+        // 昵称长度校验
+        if (userName.length > 12) {
+            this.alert.current.show(errorCode["03"]);
+            return false;
+        }
+
+        // 密码非空校验
+        if (password === "") {
+            this.alert.current.show(errorCode["05"]);
+            return false;
+        }
+
+        // 密码长度校验
+        if (password.length < 8) {
+            this.alert.current.show(errorCode["06"]);
+            return false;
+        }
+
+        // 昵称与密码匹配校验（需对用户的密码加密后正向匹配）
+        if (password !== accountsObj[userName].password) {
+            this.alert.current.show(errorCode["07"]);
+            return false;
+        }
+
+        // 通过所有校验
+        return true;
+    }
+
+    _signIn() {
+        const { loginDispatch, navigation } = this.props;
+
+        if (this._loginValidator()) {
+            // 派发登录action
+            loginDispatch(actionCreator.login());
+            navigation.navigate("SubMainTab");
+        }
+
+        return ;
     }
 
 	render() {
@@ -53,7 +115,7 @@ export default class SignIn extends Component {
 					rightPressFunc={() => {
 						navigate("Register");
 					}}
-					rightComp={<FontAweIcon name="registered" size={26} />}
+					rightComp={<AntdIcon name="login" size={24} color="#000" />}
 				/>
 				<View style={{ flex: 1, backgroundColor: "rgb(46, 50, 70)" }}>
 					<View style={{ flex: 1 }} />
@@ -83,7 +145,24 @@ export default class SignIn extends Component {
                         />
                     </View>
 				</View>
+                <AlertDialog ref={this.alert} />
 			</View>
 		);
 	}
 }
+
+const mapStateToProps = (store) => {
+    return {
+        accountsObj: store.store.accounts
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginDispatch(loginAction) {
+            dispatch(loginAction);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

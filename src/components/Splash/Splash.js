@@ -17,11 +17,11 @@ class Splash extends Component {
         const { loginStatus, navigation } = this.props;
         console.log("aaaa", loginStatus);
         if (loginStatus === "LOGIN") {
-            navigation.navigate("");
+            navigation.navigate("SubMainTab");
         } else if (loginStatus === "LOGOUT") {
             navigation.navigate("SignIn");
         } else {
-            navigation.navigate("");
+            navigation.navigate("SubMainTab");
         }
     }
 

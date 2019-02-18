@@ -42,7 +42,8 @@ const Header = props => {
 		headerRightWidth,
 		rightPressFunc,
         rightComp,
-        customStyle
+        customStyle,
+        statusBarBgColor
 	} = props;
 	const { goBack } = navigation;
 
@@ -116,7 +117,7 @@ const Header = props => {
         <View style={{ 
             height: STATUS_BAR_HEIGHT + headerHeight
         }}>
-            <StatusBarComp />
+            <StatusBarComp setBgColor={statusBarBgColor === "" ? headerBgColor : statusBarBgColor} />
             <View
                 style={[
                     styles.flexDirRow,
@@ -160,7 +161,10 @@ Header.propTypes = {
 	rightComp: PropTypes.node,
 
 	// headerTitle
-	headerTitle: PropTypes.string
+    headerTitle: PropTypes.string,
+    
+    // statusBar
+    statusBarBgColor: PropTypes.string
 };
 
 Header.defaultProps = {
@@ -175,7 +179,9 @@ Header.defaultProps = {
 	headerLeftWidth: 50,
 
 	// headerRight
-	headerRightWidth: 50
+    headerRightWidth: 50,
+    
+    statusBarBgColor: ""
 };
 
 export default withNavigation(Header);

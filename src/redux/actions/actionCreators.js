@@ -1,11 +1,12 @@
 import * as actionType from "./actions";
 
-export const register = (account, password) => {
+export const register = (userName, password) => {
     return {
         type: actionType.register,
         payload: {
-            account,
-            password
+            [userName]: {
+                password
+            }
         }
     }
 }

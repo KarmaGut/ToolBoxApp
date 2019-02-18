@@ -4145,6 +4145,11 @@ node-fetch@^2.2.0:
   resolved "http://registry.npm.taobao.org/node-fetch/download/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
   integrity sha1-Gh2UC7+5FqHT4CGfA36J5x+MX6U=
 
+node-forge@^0.8.0:
+  version "0.8.0"
+  resolved "http://registry.npm.taobao.org/node-forge/download/node-forge-0.8.0.tgz#b897a89f25fe85ed7d0e3bd0c744c62931254dca"
+  integrity sha1-uJeonyX+he19DjvQx0TGKTElTco=
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "http://registry.npm.taobao.org/node-int64/download/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
@@ -4820,6 +4825,14 @@ react-native-device-info@^0.26.3:
   resolved "http://registry.npm.taobao.org/react-native-device-info/download/react-native-device-info-0.26.3.tgz#8dff9e64284ca274a8a574d5ae3bf4ed3f0a236d"
   integrity sha1-jf+eZChMonSopXTVrjv07T8KI20=
 
+react-native-drawer@^2.5.1:
+  version "2.5.1"
+  resolved "http://registry.npm.taobao.org/react-native-drawer/download/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
+  integrity sha1-CLkxQYT0jHJPG0Z/iFl5c2l5hlQ=
+  dependencies:
+    prop-types "^15.5.8"
+    tween-functions "^1.0.1"
+
 react-native-elements@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/react-native-elements/download/react-native-elements-1.0.0.tgz#95bc194f61ec4658d8dbd977524f8c4fd3ada136"
@@ -4848,6 +4861,11 @@ react-native-i18n@^2.0.15:
   integrity sha1-CbWpg2EW+n29AFTEbi0QFMHvPGU=
   dependencies:
     i18n-js "3.0.11"
+
+react-native-modal-translucent@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-modal-translucent/download/react-native-modal-translucent-2.0.0.tgz#a0b9e4a2fa1ed8e47be1d4bb8c2bf0deee0721c4"
+  integrity sha1-oLnkovoe2OR74dS7jCvw3u4HIcQ=
 
 react-native-paper@^2.11.1:
   version "2.11.1"
@@ -5123,6 +5141,11 @@ realpath-native@^1.0.0, realpath-native@^1.0.2:
   integrity sha1-IAMpT+oj+wZy8kduviL89Jii1lw=
   dependencies:
     util.promisify "^1.0.0"
+
+redux-persist@^5.10.0:
+  version "5.10.0"
+  resolved "http://registry.npm.taobao.org/redux-persist/download/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
+  integrity sha1-XY2ALFVx5Vkk78HDqbI1dSg75is=
 
 redux-thunk@^2.3.0:
   version "2.3.0"
@@ -5950,6 +5973,11 @@ tunnel-agent@^0.6.0:
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
+
+tween-functions@^1.0.1:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/tween-functions/download/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
+  integrity sha1-GuOlDnxguz3vd06scHrLynO7w/8=
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"

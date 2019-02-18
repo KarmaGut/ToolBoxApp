@@ -1,14 +1,28 @@
 import { actionType } from "@actions";
 
-const initialState = {
+let initialState = {
     loginStatus: "LOGOUT",
-    accounts: [{
-        account: "admin",
-        password: "123456"
-    }]
+    accounts: {
+        "admin": {
+            password: "123456",
+            imgSrc: require("@images/profileImage_11.png")
+        }
+    },
+    profileImages: [
+        require("@images/profileImage_1.png"),
+        require("@images/profileImage_2.png"),
+        require("@images/profileImage_3.png"),
+        require("@images/profileImage_4.png"),
+        require("@images/profileImage_5.png"),
+        require("@images/profileImage_6.png"),
+        require("@images/profileImage_7.png"),
+        require("@images/profileImage_8.png"),
+        require("@images/profileImage_9.png"),
+        require("@images/profileImage_10.png")
+    ]
 };
 
-export const loginStatus = (store = initialState, action) => {
+export const publicReducer = (store = initialState, action) => {
     switch(action.type) {
         case actionType.login :
             return {
@@ -21,17 +35,13 @@ export const loginStatus = (store = initialState, action) => {
                 loginStatus: "LOGOUT"
             }
         case actionType.register :
-            const { account, password } = action.payload;
             return {
                 ...store,
                 loginStatus: "LOGIN",
-                accounts: [
+                accounts: {
                     ...store.accounts,
-                    {
-                        account,
-                        password
-                    }
-                ]
+                    ...action.payload
+                }
             }
         default : 
             return store;

@@ -14,9 +14,11 @@ module.exports = {
                     "@PwManagement": "./src/components/PwManagement",
                     "@Thoughts": "./src/components/Thoughts",
                     "@TodoList": "./src/components/TodoList",
+                    "@DrawerContent": "./src/components/DrawerContent",
                     "@redux": "./src/redux",
                     "@actions": "./src/redux/actions",
                     "@reducers": "./src/redux/reducers",
+                    "@persistedRedux": "./src/redux/persistedRedux",
                     "@utility": "./src/utility",
                     "@utilityComp": "./src/utility/utilityComp",
                     "@utilityJS": "./src/utility/utilityJS",
@@ -27,7 +29,8 @@ module.exports = {
                     "@App": "./src/App",
                     "@images": "./images",
                     "@languages": "./src/languages",
-                    "@Icons": "./Icons"
+                    "@Icons": "./Icons",
+                    "@validator": "./src/validator"
                 }
 			}
 		]

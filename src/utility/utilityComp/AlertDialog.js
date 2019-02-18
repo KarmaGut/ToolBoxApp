@@ -128,7 +128,7 @@ export default class AlertDialog extends Component {
 											});
 										}}
 									>
-										<Text style={{ fontSize: 16, color: "#5EB849" }}>
+										<Text style={{ fontSize: 16, color: "rgb(87, 95, 132)" }}>
 											{CancelText}
 										</Text>
 									</TouchableOpacity>
@@ -149,7 +149,7 @@ export default class AlertDialog extends Component {
 										});
 									}}
 								>
-									<Text style={{ fontSize: 16, color: "#5EB849" }}>
+									<Text style={{ fontSize: 16, color: "rgb(87, 95, 132)" }}>
 										{ConfirmText}
 									</Text>
 								</TouchableOpacity>
