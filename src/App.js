@@ -29,9 +29,9 @@ export default class RootComponent extends Component {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                <LeftDrawer contentComp={<DrawerContent />}>
-                    <RootRoute />
-                </LeftDrawer>
+                    <LeftDrawer contentComp={<DrawerContent />} >
+                        <RootRoute />
+                    </LeftDrawer>
                 </PersistGate>
             </Provider>
         )
