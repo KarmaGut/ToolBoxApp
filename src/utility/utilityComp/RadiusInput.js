@@ -14,8 +14,8 @@ const RadiusInput  = (props) => {
             leftIcon={LeftIcon}
             containerStyle={{
                 width: containerWidth,
-                height: 60,
-                borderRadius: 30,
+                height: 56,
+                borderRadius: 28,
                 borderColor: "rgb(90, 99, 136)",
                 borderWidth: 1,
                 backgroundColor: "rgb(46, 50, 70)",

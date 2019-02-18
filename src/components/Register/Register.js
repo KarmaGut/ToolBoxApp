@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Header } from "@utilityComp";
 import I18n from "@languages";
 import { SimpleLineIcon } from "@Icons";
@@ -16,13 +16,18 @@ class Register extends Component {
             userName: "",
             password: "",
             confirmPassword: "",
-            lockName: "lock-open"
+            question: "",
+            answer: "",
+            lockName: "lock-open",
+            showQue: false
         };
         this._getUserName = this._getUserName.bind(this);
         this._getPassword = this._getPassword.bind(this);
         this._getConfirmPassword = this._getConfirmPassword.bind(this);
         this._register = this._register.bind(this);
         this._registerValidator = this._registerValidator.bind(this);
+        this._getQuestion = this._getQuestion.bind(this);
+        this._getAnswer = this._getAnswer.bind(this);
     }
 
     _getUserName(userName) {
@@ -57,9 +62,21 @@ class Register extends Component {
             })
     }
 
+    _getQuestion(question) {
+        this.setState({
+            question
+        });
+    }
+
+    _getAnswer(answer) {
+        this.setState({
+            answer
+        })
+    }
+
     _registerValidator() {
         const { accountsObj } = this.props;
-        const { userName, password, confirmPassword } = this.state;
+        const { userName, password, confirmPassword, question, answer } = this.state;
         // 昵称非空校验
         if (userName === "") {
             this.alert.current.show(errorCode["50"]);
@@ -115,6 +132,18 @@ class Register extends Component {
             return false;
         }
 
+        // 提示问题不为空，则答案不能为空
+        if (question !== "" && answer === "") {
+            this.alert.current.show("提示问题答案不能为空");
+            return false;
+        }
+
+        // 答案不为空，则问题不能为空
+        if (answer !== "" && question === "") {
+            this.alert.current.show("提示问题不能为空");
+            return false;
+        }
+
         // 注册字段通过所有校验
         return true;
     }
@@ -133,7 +162,7 @@ class Register extends Component {
 	render() {
         const { navigation } = this.props;
         const { goBack } = navigation;
-        const { lockName } = this.state;
+        const { lockName, showQue } = this.state;
 
 		return (
 			<View style={{ flex: 1 }}>
@@ -146,7 +175,7 @@ class Register extends Component {
 				/>
 				<View style={{ flex: 1, backgroundColor: "rgb(46, 50, 70)" }}>
 					<View style={{ flex: 1 }} />
-					<View style={{ flex: 1, paddingHorizontal: 20 }}>
+					<View style={{ flex: 4, paddingHorizontal: 20 }}>
 						<RadiusInput
 							placeholder="昵称"
                             LeftIcon={<SimpleLineIcon name="user" size={26} color="rgb(87, 95, 132)" />}
@@ -158,7 +187,6 @@ class Register extends Component {
                         <RadiusInput
 							placeholder="密码"
                             LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
-                            // keyboardType="numeric"
                             secureTextEntry={true}
                             customContainerStyle={{
                                 marginBottom: 10
@@ -168,18 +196,53 @@ class Register extends Component {
                         <RadiusInput
 							placeholder="确认密码"
                             LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
-                            // keyboardType="numeric"
                             secureTextEntry={true}
+                            customContainerStyle={{
+                                marginBottom: 10
+                            }}
                             onChangeFunc={this._getConfirmPassword}
 						/>
-					</View>
-					<View style={{ flex: 1, paddingHorizontal: 20 }}>
-                        <ButtonComp 
-                            buttonTitle="注册"
-                            buttonBgColor="rgb(87, 95, 132)"
-                            buttonHeight={50}
-                            onPressFunc={this._register}
-                        />
+                        <View style={{ height: 30, justifyContent: "center", alignItems: "flex-end", paddingHorizontal: 10 }}>
+                            <TouchableOpacity onPress={() => {
+                                this.setState({
+                                    showQue: !showQue
+                                })
+                            }}>
+                                <Text style={{ fontSize: 16, fontWeight: "400", color: "rgb(87, 95, 132)"}}>密码提示问题？</Text>
+                            </TouchableOpacity>
+                        </View>
+					{/* </View>
+					<View style={{ flex: 2, paddingHorizontal: 20 }}> */}
+                        { showQue ? (
+                            <View style={{ flex: 1 }}>
+                                <RadiusInput
+                                    placeholder="密码提示问题（可选）"
+                                    LeftIcon={<SimpleLineIcon name="user" size={26} color="rgb(87, 95, 132)" />}
+                                    customContainerStyle={{
+                                        marginBottom: 10
+                                    }}
+                                    onChangeFunc={this._getQuestion}
+                                />
+                                <RadiusInput
+                                    placeholder="密码提示问题答案（可选）"
+                                    LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
+                                    customContainerStyle={{
+                                        marginBottom: 10
+                                    }}
+                                    onChangeFunc={this._getAnswer}
+                                />
+                            </View>
+                        ): (
+                            <View />
+                        )}
+                        <View style={{ flex: 1 }}>
+                            <ButtonComp 
+                                buttonTitle="注册"
+                                buttonBgColor="rgb(87, 95, 132)"
+                                buttonHeight={50}
+                                onPressFunc={this._register}
+                            />
+                        </View>
                     </View>
 				</View>
                 <AlertDialog ref={this.alert} />
