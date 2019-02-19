@@ -5,6 +5,7 @@ import FontAweIcon from "react-native-vector-icons/FontAwesome";
 import FontAwe5Icon from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcon from "react-native-vector-icons/SimpleLineIcons";
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialComIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
-export { AntdIcon, EntypoIcon, FeatherIcon, FontAweIcon, FontAwe5Icon, Ionicons, SimpleLineIcon, MaterialIcon };
+export { AntdIcon, EntypoIcon, FeatherIcon, FontAweIcon, FontAwe5Icon, Ionicons, SimpleLineIcon, MaterialComIcon, MaterialIcon };

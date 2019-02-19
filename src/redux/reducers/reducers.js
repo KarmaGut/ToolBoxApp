@@ -2,10 +2,13 @@ import { actionType } from "@actions";
 
 let initialState = {
     loginStatus: "LOGOUT",
+    currentAccount: "admin",
     accounts: {
         "admin": {
-            password: "123456",
-            imgSrc: require("@images/profileImage_11.png")
+            password: "372574152",
+            imgSrc: require("@images/profileImage_11.png"),
+            question: "您的QQ号是多少？",
+            answer: "372574152"
         }
     },
     profileImages: [
@@ -27,7 +30,8 @@ export const publicReducer = (store = initialState, action) => {
         case actionType.login :
             return {
                 ...store,
-                loginStatus: "LOGIN"
+                loginStatus: "LOGIN",
+                currentAccount: action.payload.userName
             }
         case actionType.logout :
             return {
@@ -38,9 +42,25 @@ export const publicReducer = (store = initialState, action) => {
             return {
                 ...store,
                 loginStatus: "LOGIN",
+                currentAccount: Object.keys(action.payload)[0],
                 accounts: {
                     ...store.accounts,
                     ...action.payload
+                },
+                profileImages: store.profileImages.length === 0 ? [] : store.profileImages.slice(1)
+            }
+        case actionType.modifyPassword :
+            const { currentAccount, accounts } = store;
+            const currentAccountObj = accounts[currentAccount];
+            
+            return {
+                ...store,
+                accounts: {
+                    ...store.accounts,
+                    [currentAccount]: {
+                        ...currentAccountObj,
+                        password: action.payload.newPassword
+                    }
                 }
             }
         default : 

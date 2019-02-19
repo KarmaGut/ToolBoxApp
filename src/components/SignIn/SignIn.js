@@ -7,6 +7,7 @@ import { RadiusInput, ButtonComp, AlertDialog } from "@utilityComp";
 import { errorCode, userNameReg } from "@validator";
 import { connect } from "react-redux";
 import { actionCreator } from "@actions";
+import RCTDeviceEventEmitter from "RCTDeviceEventEmitter";
 
 class SignIn extends Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class SignIn extends Component {
         }
 
         // 昵称长度校验
-        if (userName.length > 12) {
+        if (userName.length > 8) {
             this.alert.current.show(errorCode["03"]);
             return false;
         }
@@ -93,11 +94,30 @@ class SignIn extends Component {
 
     _signIn() {
         const { loginDispatch, navigation } = this.props;
+        const { userName } = this.state;
 
         if (this._loginValidator()) {
             // 派发登录action
-            loginDispatch(actionCreator.login());
-            navigation.navigate("SubMainTab");
+            loginDispatch(actionCreator.login(userName));
+            RCTDeviceEventEmitter.emit("TOAST_SHOW", {
+                Comp: (
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <Text style={{ color: "#fff" }}>
+                            {"登录成功"}
+                        </Text>
+                    </View>
+                ),
+                delayTime: 200,
+                delayFunc: () => {
+                    navigation.navigate("SubMainTab");
+                }
+            });
         }
 
         return ;
@@ -121,7 +141,8 @@ class SignIn extends Component {
 					<View style={{ flex: 1 }} />
 					<View style={{ flex: 1, paddingHorizontal: 20 }}>
 						<RadiusInput
-							placeholder="昵称"
+                            placeholder="昵称"
+                            maxLength={8}
                             LeftIcon={<SimpleLineIcon name="user" size={26} color="rgb(87, 95, 132)" />}
                             customContainerStyle={{
                                 marginBottom: 10
@@ -138,7 +159,7 @@ class SignIn extends Component {
 					</View>
 					<View style={{ flex: 1, paddingHorizontal: 20 }}>
                         <ButtonComp 
-                            buttonTitle="登录"
+                            buttonTitle={"登录"}
                             buttonBgColor="rgb(87, 95, 132)"
                             buttonHeight={50}
                             onPressFunc={this._signIn}

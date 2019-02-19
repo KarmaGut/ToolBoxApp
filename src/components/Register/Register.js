@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Header } from "@utilityComp";
 import I18n from "@languages";
-import { SimpleLineIcon } from "@Icons";
+import { SimpleLineIcon, MaterialIcon } from "@Icons";
 import { RadiusInput, ButtonComp, AlertDialog } from "@utilityComp";
 import { errorCode, userNameReg } from "@validator";
 import { connect } from "react-redux";
 import { actionCreator } from "@actions";
+import RCTDeviceEventEmitter from "RCTDeviceEventEmitter";
 
 class Register extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class Register extends Component {
             confirmPassword: "",
             question: "",
             answer: "",
-            lockName: "lock-open",
+            lockName_1: "lock-open",
+            lockName_2: "lock-open",
             showQue: false
         };
         this._getUserName = this._getUserName.bind(this);
@@ -39,12 +41,12 @@ class Register extends Component {
     _getPassword(password) {
         password.length > 0 ? 
             this.setState({
-                lockName: "lock",
+                lockName_1: "lock",
                 password
             })
         : 
             this.setState({
-                lockName: "lock-open",
+                lockName_1: "lock-open",
                 password
             })
     }
@@ -52,12 +54,12 @@ class Register extends Component {
     _getConfirmPassword(confirmPassword) {
         confirmPassword.length > 0 ? 
             this.setState({
-                lockName: "lock",
+                lockName_2: "lock",
                 confirmPassword
             })
         : 
             this.setState({
-                lockName: "lock-open",
+                lockName_2: "lock-open",
                 confirmPassword
             })
     }
@@ -97,7 +99,7 @@ class Register extends Component {
         }
 
         // 昵称长度校验
-        if (userName.length > 12) {
+        if (userName.length > 8) {
             this.alert.current.show(errorCode["53"]);
             return false;
         }
@@ -149,11 +151,31 @@ class Register extends Component {
     }
 
     _register() {
-        const { userName, password } = this.state;
-        const { registerDispatch } = this.props;
+        const { userName, password, question, answer } = this.state;
+        const { registerDispatch, profileImages, navigation } = this.props;
         if (this._registerValidator()) {
+            let imgSrc = profileImages.length === 0 ? require("@images/profileImage_11.png") : profileImages[0]
             // 注册字段校验成功，派发注册action
-            registerDispatch(actionCreator.register(userName, password));
+            registerDispatch(actionCreator.register(userName, password, imgSrc, question, answer));
+            RCTDeviceEventEmitter.emit("TOAST_SHOW", {
+                Comp: (
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <Text style={{ color: "#fff" }}>
+                            {"注册成功"}
+                        </Text>
+                    </View>
+                ),
+                delayTime: 200,
+                delayFunc: () => {
+                    navigation.navigate("SubMainTab");
+                }
+            });
         }
 
         return ;
@@ -162,7 +184,7 @@ class Register extends Component {
 	render() {
         const { navigation } = this.props;
         const { goBack } = navigation;
-        const { lockName, showQue } = this.state;
+        const { lockName_1, lockName_2, showQue } = this.state;
 
 		return (
 			<View style={{ flex: 1 }}>
@@ -177,7 +199,8 @@ class Register extends Component {
 					<View style={{ flex: 1 }} />
 					<View style={{ flex: 4, paddingHorizontal: 20 }}>
 						<RadiusInput
-							placeholder="昵称"
+                            placeholder="昵称"
+                            maxLength={8}
                             LeftIcon={<SimpleLineIcon name="user" size={26} color="rgb(87, 95, 132)" />}
                             customContainerStyle={{
                                 marginBottom: 10
@@ -186,7 +209,7 @@ class Register extends Component {
 						/>
                         <RadiusInput
 							placeholder="密码"
-                            LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
+                            LeftIcon={<SimpleLineIcon name={lockName_1} size={26} color="rgb(87, 95, 132)" />}
                             secureTextEntry={true}
                             customContainerStyle={{
                                 marginBottom: 10
@@ -195,7 +218,7 @@ class Register extends Component {
 						/>
                         <RadiusInput
 							placeholder="确认密码"
-                            LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
+                            LeftIcon={<SimpleLineIcon name={lockName_2} size={26} color="rgb(87, 95, 132)" />}
                             secureTextEntry={true}
                             customContainerStyle={{
                                 marginBottom: 10
@@ -217,7 +240,8 @@ class Register extends Component {
                             <View style={{ flex: 1 }}>
                                 <RadiusInput
                                     placeholder="密码提示问题（可选）"
-                                    LeftIcon={<SimpleLineIcon name="user" size={26} color="rgb(87, 95, 132)" />}
+                                    maxLength={20}
+                                    LeftIcon={<SimpleLineIcon name="question" size={26} color="rgb(87, 95, 132)" />}
                                     customContainerStyle={{
                                         marginBottom: 10
                                     }}
@@ -225,7 +249,8 @@ class Register extends Component {
                                 />
                                 <RadiusInput
                                     placeholder="密码提示问题答案（可选）"
-                                    LeftIcon={<SimpleLineIcon name={lockName} size={26} color="rgb(87, 95, 132)" />}
+                                    maxLength={20}
+                                    LeftIcon={<MaterialIcon name="question-answer" size={26} color="rgb(87, 95, 132)" />}
                                     customContainerStyle={{
                                         marginBottom: 10
                                     }}
@@ -253,7 +278,8 @@ class Register extends Component {
 
 const mapStateToProps = (store, ownProps) => {
     return {
-        accountsObj: store.store.accounts
+        accountsObj: store.store.accounts,
+        profileImages: store.store.profileImages
     }
 }
 

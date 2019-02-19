@@ -8,6 +8,7 @@ import RadiusInput from "./RadiusInput";
 import ButtonComp from "./ButtonComp";
 import AlertDialog from "./AlertDialog";
 import LeftDrawer from "./LeftDrawer";
+import CustmoDivider from "./Divider";
 
 export {
 	Header,
@@ -18,5 +19,6 @@ export {
     RadiusInput,
     ButtonComp,
     AlertDialog,
-    LeftDrawer
+    LeftDrawer,
+    CustmoDivider
 };

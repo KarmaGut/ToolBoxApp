@@ -15,6 +15,7 @@ module.exports = {
                     "@Thoughts": "./src/components/Thoughts",
                     "@TodoList": "./src/components/TodoList",
                     "@DrawerContent": "./src/components/DrawerContent",
+                    "@ForgetPassword": "./src/components/ForgetPassword",
                     "@redux": "./src/redux",
                     "@actions": "./src/redux/actions",
                     "@reducers": "./src/redux/reducers",

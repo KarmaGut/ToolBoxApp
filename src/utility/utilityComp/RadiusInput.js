@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Input } from "react-native-elements";
 
 const RadiusInput  = (props) => {
-    const { placeholder, LeftIcon, onChangeFunc, containerWidth, keyboardType, customContainerStyle, secureTextEntry } = props;
+    const { placeholder, LeftIcon, onChangeFunc, containerWidth, keyboardType, customContainerStyle, secureTextEntry, maxLength } = props;
 
     return (
         <Input 
@@ -26,6 +26,7 @@ const RadiusInput  = (props) => {
             inputContainerStyle={{ borderBottomWidth: 0 }}
             onChangeText={onChangeFunc}
             secureTextEntry={secureTextEntry}
+            maxLength={maxLength}
         />
     )
 }
@@ -38,7 +39,8 @@ RadiusInput.propTypes = {
     containerWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     keyboardType: PropTypes.string,
     customContainerStyle: PropTypes.object,
-    secureTextEntry: PropTypes.bool
+    secureTextEntry: PropTypes.bool,
+    maxLength: PropTypes.number
 };
 
 RadiusInput.defaultProps = {
@@ -47,7 +49,8 @@ RadiusInput.defaultProps = {
     containerWidth: "100%",
     keyboardType: "default",
     customContainerStyle: {},
-    secureTextEntry: false
+    secureTextEntry: false,
+    maxLength: 100
 }
 
 export default RadiusInput;

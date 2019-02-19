@@ -28,10 +28,16 @@ class PwManagement extends Component {
 		this.listenLogout = RCTDeviceEventEmitter.addListener("LOGOUT", () => {
             navigate("SignIn");
         });
+
+        // 监听FORGET_PASSWORD事件，并路由到ForgetPassword页面
+        this.listenForget = RCTDeviceEventEmitter.addListener("FORGET_PASSWORD", () => {
+            navigate("ForgetPassword");
+        });
     }
     
     componentWillUnmount() {
         this.listenLogout.remove();
+        this.listenForget.remove();
     }
 
 	render() {

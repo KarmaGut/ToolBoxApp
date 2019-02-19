@@ -32,10 +32,10 @@ const ButtonComp = props => {
 };
 
 Button.propTypes = {
-	buttonTitle: PropTypes.string.isRequired,
-	buttonBgColor: PropTypes.string.isRequired,
+	buttonTitle: PropTypes.string,
+	buttonBgColor: PropTypes.string,
 	buttonWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	buttonHeight: PropTypes.number.isRequired,
+	buttonHeight: PropTypes.number,
 	customButtonStyle: PropTypes.object,
 	textSize: PropTypes.number,
 	textStyle: PropTypes.object,

@@ -3,7 +3,7 @@ import Memo from "@Memo";
 import PwManagement from "@PwManagement";
 import Thoughts from "@Thoughts";
 import TodoList from "@TodoList";
-import { FontAwe5Icon, MaterialIcon } from "@Icons";
+import { FontAwe5Icon, MaterialComIcon } from "@Icons";
 
 export default routeConfigs = {
     TodoList: {
@@ -34,7 +34,7 @@ export default routeConfigs = {
             return {
                 tabBarLabel: "想法",
                 tabBarIcon: ({ focused }) => {
-                    return <MaterialIcon name="thought-bubble" size={20} color="#fff" />
+                    return <MaterialComIcon name="thought-bubble" size={20} color="#fff" />
                 }
             }
         }
