@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { Header, RadiusInput, ButtonComp, AlertDialog } from "@utilityComp";
 import { connect } from "react-redux";
 import { MaterialIcon, SimpleLineIcon } from "@Icons";
@@ -138,7 +139,7 @@ class ForgetPassword extends Component {
         const question = accountObjs[currentAccount].question;
 
         return (
-            <View style={{ flex: 1 }}> 
+            <SafeAreaView style={{ flex: 1 }}> 
                 <Header
                     headerTitle={"密码找回"}
 					leftPressFunc={() => {
@@ -188,7 +189,7 @@ class ForgetPassword extends Component {
                     </View>
                 </View>
                 <AlertDialog ref={this.alert} />
-            </View>
+            </SafeAreaView>
         )
     }
 }

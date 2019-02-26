@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { Header } from "@utilityComp";
 import I18n from "@languages";
 import { SimpleLineIcon, MaterialIcon } from "@Icons";
@@ -187,7 +188,7 @@ class Register extends Component {
         const { lockName_1, lockName_2, showQue } = this.state;
 
 		return (
-			<View style={{ flex: 1 }}>
+			<SafeAreaView style={{ flex: 1 }}>
 				<Header
 					headerTitle={I18n.t("Register")}
 					leftPressFunc={() => {
@@ -271,7 +272,7 @@ class Register extends Component {
                     </View>
 				</View>
                 <AlertDialog ref={this.alert} />
-			</View>
+			</SafeAreaView>
 		);
 	}
 }

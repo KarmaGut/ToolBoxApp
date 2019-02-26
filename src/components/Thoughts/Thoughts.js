@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { Header } from "@utilityComp";
 import { SimpleLineIcon } from "@Icons";
 import i18n from "@languages";
@@ -7,7 +8,6 @@ import RCTDeviceEventEmitter from "RCTDeviceEventEmitter";
 
 class Thoughts extends Component {
 	constructor(props) {
-		super(props);
 		super(props);
 		this._leftPressFunc = this._leftPressFunc.bind(this);
 		this._rightPressFunc = this._rightPressFunc.bind(this);
@@ -42,7 +42,7 @@ class Thoughts extends Component {
 
 	render() {
 		return (
-            <View style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <Header
                     headerTitle={i18n.t("Thoughts.thoughts")}
                     leftPressFunc={this._leftPressFunc}
@@ -53,7 +53,7 @@ class Thoughts extends Component {
                 <View style={{ flex: 1 }}>
                     <Text>想法</Text>
                 </View>
-            </View>
+            </SafeAreaView>
 		);
 	}
 }

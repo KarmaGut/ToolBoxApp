@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { Header } from "@utilityComp";
 import I18n from "@languages";
 import { AntdIcon, SimpleLineIcon } from "@Icons";
@@ -129,7 +130,7 @@ class SignIn extends Component {
         const { lockName } = this.state;
 
 		return (
-			<View style={{ flex: 1 }}>
+			<SafeAreaView style={{ flex: 1 }}>
 				<Header
 					headerTitle={I18n.t("Login")}
 					rightPressFunc={() => {
@@ -167,7 +168,7 @@ class SignIn extends Component {
                     </View>
 				</View>
                 <AlertDialog ref={this.alert} />
-			</View>
+			</SafeAreaView>
 		);
 	}
 }

@@ -15,16 +15,16 @@ export default class RootComponent extends Component {
         this.state = {
             toastPosition: "bottom"
         };
-        this._logCurrentStore = this._logCurrentStore.bind(this);
+        // this._logCurrentStore = this._logCurrentStore.bind(this);
     }
 
-    _logCurrentStore() {
-        console.log("state改变，当前的state对象为：", store.getState());
-    }
+    // _logCurrentStore() {
+    //     console.log("state改变，当前的state对象为：", store.getState());
+    // }
 
     componentDidMount() {
         // 根组件中添加监听事件，监听store的变化，并持久化store对象
-        this.unsubscribe = store.subscribe(this._logCurrentStore);
+        // this.unsubscribe = store.subscribe(this._logCurrentStore);
 
         this.listenToastShouldShow = RCTDeviceEventEmitter.addListener(
 			"TOAST_SHOW",
@@ -52,7 +52,7 @@ export default class RootComponent extends Component {
     }
 
     componentWillUnmount() {
-        this.unsubscribe();
+        // this.unsubscribe();
         this.listenToastShouldShow.remove();
     }
 

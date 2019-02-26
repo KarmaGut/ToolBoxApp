@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import i18n from "@languages";
 import { connect } from "react-redux";
 import { actionCreator } from "@actions";
@@ -111,7 +112,7 @@ class DrawerContent extends Component {
 		const { currentAccount, accountObjs } = this.props;
 
 		return (
-			<View style={{ flex: 1, backgroundColor: "#fff" }}>
+			<SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
 				<View
 					style={[styles.centerBottom, { flex: 2, backgroundColor: "rgb(46, 50, 70)" }]}
 				>
@@ -154,7 +155,7 @@ class DrawerContent extends Component {
 					</Text>
 				</TouchableOpacity>
 				<AlertDialog ref={this.alert} />
-			</View>
+			</SafeAreaView>
 		);
 	}
 }

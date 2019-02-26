@@ -1,15 +1,15 @@
 import * as actionType from "./actions";
 
 // 注册
-export const register = (userName, password, imgSrc, answer, question) => {
+export const register = (userName, password, imgSrc, question, answer) => {
     return {
         type: actionType.register,
         payload: {
             [userName]: {
                 password,
                 imgSrc,
-                answer,
-                question
+                question,
+                answer
             }
         }
     }
