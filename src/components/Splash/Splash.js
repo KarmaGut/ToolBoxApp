@@ -16,7 +16,7 @@ class Splash extends Component {
 
     componentDidMount() {
         const { loginStatus, navigation } = this.props;
-        console.log("aaaa", loginStatus);
+        console.log("loginStatus", loginStatus);
         if (loginStatus === "LOGIN") {
             navigation.navigate("SubMainTab");
         } else if (loginStatus === "LOGOUT") {

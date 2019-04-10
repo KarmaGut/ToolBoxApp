@@ -3,8 +3,8 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 
 const MaterialBottomTabNavigatorConfig = {
 	initialRouteName: "TodoList",
-	activeColor: "#f0edf6",
-	inactiveColor: "#3e2465",
+	// activeColor: "#f0edf6",
+	// inactiveColor: "#3e2465",
     barStyle: { backgroundColor: "rgb(46, 50, 70)" }
 };
 
